@@ -3,55 +3,49 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainWindow {
-    JButton addButton,clearButton;
-    JPanel taskPanel,buttonsPanel;
-    JFrame mainWindow;
-    int idCounter = 1;
+public class MainWindow extends JFrame{
+
+    private TitleBar titleBar;
+    private Footer footer;
+    private ListTask listTask;
+    private JButton addButton;
+    private JButton clearButton;
+
     public MainWindow(){
 
-        mainWindow = new JFrame("Nexus");
-        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// Cоздание окна приложения
-        mainWindow.setSize(500,1000);
+        this.setSize(500,800);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+//        this.setResizable(false);
 
-        taskPanel = new JPanel();
-        taskPanel.setPreferredSize(new Dimension(500,800));// Создание панели для размешения задач
+        titleBar = new TitleBar();
+        listTask = new ListTask();
+        footer = new Footer();
 
-        buttonsPanel = new JPanel();
-        buttonsPanel.setSize(new Dimension(500,200));// Создание панели для двух кнопок
-
-        addButton = new JButton("Добавить задачу");// Кнопка добавление и очистки задач
-        clearButton = new JButton("Удалить решенные задачи");
-        buttonsPanel.add(addButton);
-        buttonsPanel.add(clearButton);
-
-        mainWindow.getContentPane().add(BorderLayout.SOUTH,buttonsPanel);// Добавление панелей в окно
-        mainWindow.getContentPane().add(BorderLayout.NORTH,taskPanel);
-
-        mainWindow.setVisible(true);
-
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddTask();
-            }
-        });
-    }
-
-    public void AddTask(){
-        JLabel idTask = new JLabel(String.valueOf(idCounter));
-        idCounter++;
-
-        JTextField textTask = new JTextField();
-        textTask.setPreferredSize(new Dimension(400,30));
-
-        JCheckBox isDecide = new JCheckBox();
-
-        taskPanel.add(idTask);
-        taskPanel.add(textTask);
-        taskPanel.add(isDecide);
-
-        mainWindow.revalidate();
+        this.add(titleBar,BorderLayout.NORTH);
+        this.add(footer,BorderLayout.SOUTH);
+        this.add(listTask,BorderLayout.CENTER);
 
     }
+
+//    public void AddTask(){
+//        JPanel taskPanel = new JPanel();
+//        tasksPanel.setPreferredSize(new Dimension(500,40));
+//        JLabel idTask = new JLabel(String.valueOf(idCounter));// Добавление новой задачи
+//        idCounter++;
+//
+//        JTextField textTask = new JTextField();
+//        textTask.setPreferredSize(new Dimension(400,30));
+//
+//        JCheckBox isDecide = new JCheckBox();
+//
+//        taskPanel.add(idTask);
+//        taskPanel.add(textTask);
+//        taskPanel.add(isDecide);
+//
+//        tasksPanel.add(taskPanel);
+//
+//        mainWindow.revalidate();
+//
+//    }
 }
